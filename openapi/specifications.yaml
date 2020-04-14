@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Movies service API
+  description: Movies service is an API that provides access to a database of movies.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+    description: Local developement server
+
+paths:
+  /movies:
+    get:
+      summary: Return a list of all movies
+      responses:
+        '200': # status code
+          description: A json array of movie objects
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Movie'
+
+
+components:
+  schemas:
+    Movie:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        duration: # duration of the movie in minutes
+          type: integer
+        poster:
+          type: string
+        rating:
+          type: number
+        year: 
+          type: integer
+        genre:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        director:
+          type: string
+      required: # xxx properties are required
+        - id
+        - name
+        - description
+        - duration
+        - poster
+        - rating
+        - year
+        - genre
+    
+    Genre:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+        - id
+        - name
