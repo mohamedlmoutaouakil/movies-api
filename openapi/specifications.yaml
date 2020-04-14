@@ -12,6 +12,7 @@ paths:
   /movies:
     get:
       summary: Return a list of all movies
+      operationId: get_all_movies
       responses:
         '200': # status code
           description: A json array of movie objects
