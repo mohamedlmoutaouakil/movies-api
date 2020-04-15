@@ -22,7 +22,39 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Movie'
-                  
+        '401':
+          description: Authorization information is missing or invalid.
+        '5XX':
+          description: Unexpected error.
+  /movies/{movie_id}:
+    get:
+      summary: Return a movie by id.
+      operationId: src.movies.get_movie
+      parameters:
+        - in: path
+          name: movie_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The movie ID
+      responses:
+        '200': # movie found
+          description: A movie json object
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        '400':
+          description: Bad request. Movie ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A movie with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+
+
 
 components:
   schemas:
