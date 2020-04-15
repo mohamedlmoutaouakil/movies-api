@@ -19,8 +19,10 @@ paths:
           content:
             application/json:
               schema: 
-                $ref: '#/components/schemas/Movie'
-
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'
+                  
 
 components:
   schemas:
