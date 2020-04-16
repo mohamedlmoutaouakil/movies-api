@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 flask = "*"
 connexion = {extras = ["swagger-ui"],version = "*"}
+environs = "*"
 
 [requires]
 python_version = "3.8"

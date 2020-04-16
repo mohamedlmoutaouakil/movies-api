@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "19e332de907d762440db99e73bb594394e797f391ccba1da24bc2f17fa4a2deb"
+            "sha256": "183b20dd0dba2a420ad1ac445b2e9bee30946d13b8afda9004fb10047cbbbaf4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -61,6 +61,14 @@
             ],
             "index": "pypi",
             "version": "==2.6.0"
+        },
+        "environs": {
+            "hashes": [
+                "sha256:68d53c4bb283d8008865815226afba83ab2ea09898e564f3399c9e73b3d4bcfd",
+                "sha256:9502d78a3b7ea23c211c3a88f4f946d188a7d936c59c3609f9303aeb26cdc58d"
+            ],
+            "index": "pypi",
+            "version": "==7.3.1"
         },
         "flask": {
             "hashes": [
@@ -143,6 +151,13 @@
             ],
             "version": "==1.1.1"
         },
+        "marshmallow": {
+            "hashes": [
+                "sha256:90854221bbb1498d003a0c3cc9d8390259137551917961c8b5258c64026b2f85",
+                "sha256:ac2e13b30165501b7d41fc0371b8df35944f5849769d136f20e2c5f6cdc6e665"
+            ],
+            "version": "==3.5.1"
+        },
         "openapi-spec-validator": {
             "hashes": [
                 "sha256:0caacd9829e9e3051e830165367bf58d436d9487b29a09220fa7edb9f47ff81b",
@@ -156,6 +171,13 @@
                 "sha256:28669905fe725965daa16184933676547c5bb40a5153055a8dee2a4bd7933ad3"
             ],
             "version": "==0.16.0"
+        },
+        "python-dotenv": {
+            "hashes": [
+                "sha256:81822227f771e0cab235a2939f0f265954ac4763cafd806d845801c863bf372f",
+                "sha256:92b3123fb2d58a284f76cc92bfe4ee6c502c32ded73e8b051c4f6afc8b6751ed"
+            ],
+            "version": "==0.12.0"
         },
         "pyyaml": {
             "hashes": [
