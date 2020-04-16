@@ -1,12 +1,16 @@
 from flask import Flask
 import connexion
-import os
+from config import get_config
 
 def create_app():
     # Create flask application instance
-    app = connexion.App(__name__, specification_dir='../openapi/')
+    connex_app = connexion.App(__name__, specification_dir='../openapi/')
 
     # Read specification.yml to configure the endpoints
-    app.add_api('specification.yml')
+    connex_app.add_api('specification.yml')
 
-    return app.app
+    app = connex_app.app
+    env_config_obj = get_config()
+    app.config.from_object(env_config_obj)
+    
+    return app
