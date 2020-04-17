@@ -1,7 +1,10 @@
 from environs import Env
+import os
 
 env = Env()
 env.read_env() # read .env file, if it exists
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 def get_config():
     FLASK_ENV = env.str('FLASK_ENV', 'production')
@@ -16,10 +19,16 @@ def get_config():
 class Config(object):
     # Set configuration variables
 
+    # General config
     DEBUG = False
     TESTING = False
-    HOST = env.str('HOST', '127.0.0.1')
-    PORT = env.int('PORT', 5000)
+    APP_ROOT = basedir
+
+    # Database
+    DB_NAME = env.str('DB_NAME', 'dev.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_ROOT, 'databases', DB_NAME)
+    SQLALCHEMY_TRACK_MODIFICATIONS = env.bool('SQLALCHEMY_TRACK_MODIFICATIONS', False)
+    SQLALCHEMY_ECHO = env.bool('SQLALCHEMY_ECHO', False)
 
 class ProdConfig(Config):
     ENV = "production"
