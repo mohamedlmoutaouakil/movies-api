@@ -6,4 +6,7 @@ def read():
     return all_movies
 
 def get_movie(movie_id):
-    return {}
+    movie = Movie.query.get(movie_id)
+    if movie == None:
+        return 'Movie not found', 404
+    return movie
