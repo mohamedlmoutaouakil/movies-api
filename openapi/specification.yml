@@ -59,29 +59,39 @@ paths:
 components:
   schemas:
     Movie:
+      type: object
       properties:
         id:
           type: integer
+          example: 1
         name:
           type: string
+          example: 'Fight Club'
         description:
           type: string
+          example: 'Discontented with his capitalistic lifestyle, a white-collared insomniac forms an underground fight club with Tyler, a careless soap salesman. The project soon spirals down into something sinister.'
         duration: # duration of the movie in minutes
           type: integer
+          example: 151
         poster:
           type: string
+          example: 'https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg'
         rating:
           type: number
+          example: 8.8
         year: 
           type: integer
+          example: 1999
         genre:
           type: array
           items:
             $ref: '#/components/schemas/Genre'
+          example:
+            $ref: '#/components/examples/genreExample'
         director:
           type: string
+          example: 'David Fincher'
       required: # xxx properties are required
-        - id
         - name
         - description
         - duration
@@ -89,8 +99,8 @@ components:
         - rating
         - year
         - genre
-    
     Genre:
+      type: object
       properties:
         id:
           type: integer
@@ -99,3 +109,9 @@ components:
       required:
         - id
         - name
+  examples:
+    genreExample:
+      value:
+        id: 1
+        name: 'Action'
+      
