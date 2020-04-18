@@ -7,7 +7,7 @@ movie_genre_table = db.Table('movie_genre', db.Model.metadata,
 
 class Movie(db.Model):
     __tablename__ = 'movies'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(10000), nullable=False)
     duration = db.Column(db.Integer, nullable=False)
@@ -17,7 +17,47 @@ class Movie(db.Model):
     genre = db.relationship('Genre', secondary=movie_genre_table)
     director = db.Column(db.String(50), nullable=True)
 
+    @classmethod
+    def load(cls, movie_dict):
+        movie_model = Movie(
+            name=movie_dict.get('name'),
+            description=movie_dict.get('description'),
+            duration=movie_dict.get('duration'),
+            poster=movie_dict.get('poster'),
+            rating=movie_dict.get('rating'),
+            year=movie_dict.get('year'),
+            director=movie_dict.get('director')
+        )
+        for genre_dict in movie_dict.get('genre'):
+            movie_model.genre.append(Genre.load(genre_dict))
+        return movie_model
+
+    def dump(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'duration': self.duration,
+            'poster': self.poster,
+            'rating': self.rating,
+            'year': self.year,
+            'genre': [g.dump() for g in self.genre],
+            'director': self.director
+        }
+
 class Genre(db.Model):
     __tablename__ = 'genres'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(20), nullable=False)
+
+    @classmethod
+    def load(cls, genre_dict):
+        return Genre(
+            name=genre_dict.get('name')
+        )
+
+    def dump(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
