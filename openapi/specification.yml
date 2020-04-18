@@ -26,6 +26,21 @@ paths:
           description: Authorization information is missing or invalid.
         '5XX':
           description: Unexpected error.
+    post:
+      summary: Add a new movie
+      operationId: src.movies.add_movie
+      requestBody:
+        description: A movie JSON object
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: movie # requestBody is passed in as ‘body’ by default, here I overrided the name of the parameter
+              type: object
+              $ref: '#/components/schemas/Movie'
+      responses:
+        '201':
+          description: Movie added
   /movies/{movie_id}:
     get:
       summary: Return a movie by id.
@@ -53,7 +68,6 @@ paths:
           description: A movie with the specified ID was not found.
         '5XX':
           description: Unexpected error.
-
 
 
 components:
@@ -98,7 +112,7 @@ components:
         - poster
         - rating
         - year
-        - genre
+        - genre 
     Genre:
       type: object
       properties:
