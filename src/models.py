@@ -28,8 +28,15 @@ class Movie(db.Model):
             year=movie_dict.get('year'),
             director=movie_dict.get('director')
         )
+        # Retrieve the json list of Genres of the movie
+        # If the genre already exists in database then append it to genres list of Movie model
         for genre_dict in movie_dict.get('genre'):
+            genre_id = genre_dict.get('id')
+            genre_in_db = Genre.query.get(genre_id)
+            if genre_in_db == None:
             movie_model.genre.append(Genre.load(genre_dict))
+            else:
+                movie_model.genre.append(genre_in_db)
         return movie_model
 
     def dump(self):
