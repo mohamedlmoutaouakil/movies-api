@@ -17,6 +17,32 @@ class Movie(db.Model):
     genre = db.relationship('Genre', secondary=movie_genre_table)
     director = db.Column(db.String(50), nullable=True)
 
+    def update(self, id=None, name=None, description=None,
+        duration=None, poster=None, rating=None, year=None,
+        genre=None, director=None):
+        if name is not None:
+            self.name = name
+        if description is not None:
+            self.description = description
+        if duration is not None:
+            self.duration = duration
+        if poster is not None:
+            self.poster = poster
+        if rating is not None:
+            self.rating = rating
+        if year is not None:
+            self.year = year
+        if genre is not None:
+            for genre_dict in genre:
+                genre_id = genre_dict.get('id')
+                genre_in_db = Genre.query.get(genre_id)
+                if genre_in_db == None:
+                    self.genre.append(Genre.load(genre_dict))
+                else:
+                    self.genre.append(genre_in_db)
+        if director is not None:
+            self.director = director
+
     @classmethod
     def load(cls, movie_dict):
         movie_model = Movie(
@@ -34,7 +60,7 @@ class Movie(db.Model):
             genre_id = genre_dict.get('id')
             genre_in_db = Genre.query.get(genre_id)
             if genre_in_db == None:
-            movie_model.genre.append(Genre.load(genre_dict))
+                movie_model.genre.append(Genre.load(genre_dict))
             else:
                 movie_model.genre.append(genre_in_db)
         return movie_model

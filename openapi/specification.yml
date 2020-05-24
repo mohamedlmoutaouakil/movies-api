@@ -68,6 +68,31 @@ paths:
           description: A movie with the specified ID was not found.
         '5XX':
           description: Unexpected error.
+    put:
+      summary: Replace movie with id
+      operationId: src.movies.replace_movie
+      parameters:
+        - in: path
+          name: movie_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The movie ID
+      requestBody:
+        description: A movie JSON object
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: movie
+              type: object
+              $ref: '#/components/schemas/Movie'
+      responses:
+        '200':
+          description: Movie successfully replaced
+        '404':
+          description: A movie with the specified ID was not found.
 
 
 components:
