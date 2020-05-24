@@ -34,3 +34,11 @@ def replace_movie(movie_id, movie):
         movie_model = Movie.load(movie)
         db.session.add(movie_model)
     db.session.commit() # movie_to_replace ORM object is tracked => commit saves changes done to the object
+
+def delete_movie(movie_id):
+    movie_to_delete = Movie.query.filter_by(id=movie_id).one_or_none()
+    
+    if movie_to_delete is None:
+        return 'Movie not found', 404
+    db.session.delete(movie_to_delete)
+    db.session.commit()

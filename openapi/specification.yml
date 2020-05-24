@@ -93,6 +93,28 @@ paths:
           description: Movie successfully replaced
         '404':
           description: A movie with the specified ID was not found.
+    delete:
+      summary: Delete movie with id
+      operationId: src.movies.delete_movie
+      parameters:
+        - in: path
+          name: movie_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The movie ID
+      responses:
+        '204':
+          description: Movie was deleted
+        '400':
+          description: Bad request. Movie ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A movie with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
 
 
 components:
@@ -151,9 +173,4 @@ components:
       required:
         - id
         - name
-  examples:
-    genreExample:
-      value:
-        id: 1
-        name: 'Action'
       
