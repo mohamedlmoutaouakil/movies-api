@@ -1,5 +1,6 @@
 from environs import Env
 import os
+import logging
 
 env = Env()
 env.read_env() # read .env file, if it exists
@@ -14,6 +15,21 @@ def get_config():
         return 'config.TestConfig'
     elif FLASK_ENV == 'development':
         return 'config.DevConfig'
+
+def get_log_level():
+    LOG_LEVEL = env.str("LOG_LEVEL", "DEBUG")
+    if LOG_LEVEL == 'DEBUG':
+        return logging.DEBUG
+    elif LOG_LEVEL == 'INFO':
+        return logging.INFO
+    elif LOG_LEVEL == 'WARNING':
+        return logging.WARNING
+    elif LOG_LEVEL == 'ERROR':
+        return logging.ERROR
+    elif LOG_LEVEL == 'CRITICAL':
+        return logging.CRITICAL
+    else:
+        return logging.NOTSET
 
 
 class Config(object):
@@ -30,8 +46,14 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = env.bool('SQLALCHEMY_TRACK_MODIFICATIONS', False)
     SQLALCHEMY_ECHO = env.bool('SQLALCHEMY_ECHO', False)
 
+    # Logging Setup
+    LOG_TYPE = env.str("LOG_TYPE", "stream")  # Default is a Stream handler
+    LOG_LEVEL = env.str("LOG_LEVEL", "DEBUG")
+
+
 class ProdConfig(Config):
     ENV = "production"
+    LOG_LEVEL = env.str("LOG_LEVEL", "ERROR")
 
 class DevConfig(Config):
     ENV = "development"
