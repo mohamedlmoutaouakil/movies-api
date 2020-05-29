@@ -15,7 +15,8 @@ c_handler.setFormatter(c_formatter)
 # Add handler to loggers of all modules
 for logger in (
        logging.getLogger('app'),
-       logging.getLogger('movies')
+       logging.getLogger('movies'),
+       logging.getLogger('data_access_layer')
 ):
     logger.addHandler(c_handler)
     logger.setLevel(get_log_level())
