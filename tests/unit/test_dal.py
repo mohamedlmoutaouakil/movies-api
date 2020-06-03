@@ -2,6 +2,7 @@ import pytest
 from src.dal import get_all_movies, get_movie_by_id, add_movie_to_db, replace_movie_in_db, delete_movie_by_id
 from src.models import Movie, Genre
 from src.app import db
+from src.exceptions import NotFoundException
 
 movie_dict_example_1 = {
     "description": "Description1",
@@ -70,6 +71,13 @@ def test_get_movie_by_id(setup_db):
     # ASSERT
     assert movie1.dump() == movie_dict_example_1
     assert movie2.dump() == movie_dict_example_2
+
+def test_get_movie_by_id_with_non_existing_id(setup_db):
+    # ARRANGE
+    # ACT
+    # ASSERT
+    with pytest.raises(NotFoundException) as e:
+        get_movie_by_id(1)
 
 def test_add_movie_to_db(setup_db):
     # ARRANGE
