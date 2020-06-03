@@ -135,3 +135,10 @@ def test_delete_movie_by_id(setup_db):
 
     # ASSERT
     assert len(all_movies) == 0
+
+def test_delete_movie_by_id_with_non_existing_id(setup_db):
+    # ARRANGE
+    # ACT
+    # ASSERT
+    with pytest.raises(NotFoundException) as e:
+        delete_movie_by_id(1)
