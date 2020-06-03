@@ -1,5 +1,5 @@
 import pytest
-from src.dal import get_all_movies, get_movie_by_id
+from src.dal import get_all_movies, get_movie_by_id, add_movie_to_db
 from src.models import Movie, Genre
 from src.app import db
 
@@ -70,3 +70,14 @@ def test_get_movie_by_id(setup_db):
     # ASSERT
     assert movie1.dump() == movie_dict_example_1
     assert movie2.dump() == movie_dict_example_2
+
+def test_add_movie_to_db(setup_db):
+    # ARRANGE
+    add_movie_to_db(movie_dict_example_1)
+
+    # ACT
+    all_movies = Movie.query.all()
+
+    # ASSERT
+    assert len(all_movies) == 1
+    assert all_movies[0].dump() == movie_dict_example_1
