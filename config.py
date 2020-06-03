@@ -63,3 +63,4 @@ class DevConfig(Config):
 class TestConfig(Config):
     ENV = "testing"
     TESTING = True
+    SQLALCHEMY_DATABASE_URI='sqlite:///:memory:' # Using in memory database for testing
