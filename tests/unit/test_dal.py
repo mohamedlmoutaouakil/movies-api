@@ -3,42 +3,7 @@ from src.dal import get_all_movies, get_movie_by_id, add_movie_to_db, replace_mo
 from src.models import Movie, Genre
 from src.app import db
 from src.exceptions import NotFoundException
-
-movie_dict_example_1 = {
-    "description": "Description1",
-    "director": "Director1",
-    "duration": 100,
-    "genre": [
-      {
-        "id": 1,
-        "name": "Action"
-      }
-    ],
-    "id": 1,
-    "name": "Movie Example 1",
-    "poster": "Poster URL 1",
-    "rating": 7.0,
-    "year": 2019
-  }
-
-movie_dict_example_2 = {
-    "description": "Description2",
-    "director": "Director2",
-    "duration": 120,
-    "genre": [
-      {
-        "id": 1,
-        "name": "Action"
-      }
-    ],
-    "id": 2,
-    "name": "Movie Example 2",
-    "poster": "Poster URL 2",
-    "rating": 8.0,
-    "year": 2020
-  }
-
-
+from tests.data_examples import movie_dict_example_1, movie_dict_example_2
 
 def test_get_all_movies(setup_db):
     # ARRANGE
