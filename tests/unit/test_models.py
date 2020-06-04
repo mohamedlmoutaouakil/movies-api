@@ -39,3 +39,27 @@ def test_genre_dump():
 
     # ASSERT
     assert genre_dict == genre_dict_example
+
+def test_movie_dump():
+    # ARRANGE
+    movie_model = Movie()
+    movie_model.id = 1
+    movie_model.name = 'Movie Example 1'
+    movie_model.description = 'Description1'
+    movie_model.duration = 100
+    movie_model.poster = 'Poster URL 1'
+    movie_model.rating = 7.0
+    movie_model.year = 2019
+    # Instanciate a genre model example
+    genre_model = Genre()
+    genre_model.id = 1
+    genre_model.name = 'Action'
+    # Append genre example to genre list in movie model
+    movie_model.genre.append(genre_model)
+    movie_model.director = 'Director1'
+    
+    # ACT
+    movie_dict = movie_model.dump()
+
+    # ASSERT
+    assert movie_dict == movie_dict_example_1
