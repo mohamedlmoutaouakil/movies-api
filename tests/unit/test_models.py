@@ -28,3 +28,14 @@ def test_movie_load(setup_db):
     assert movie_model.genre[0].id == None
     assert movie_model.genre[0].name == movie_dict_example_1.get('genre')[0].get('name')
 
+def test_genre_dump():
+    # ARRANGE
+    genre_model = Genre()
+    genre_model.id = 1
+    genre_model.name = 'Action'
+
+    # ACT
+    genre_dict = genre_model.dump()
+
+    # ASSERT
+    assert genre_dict == genre_dict_example
