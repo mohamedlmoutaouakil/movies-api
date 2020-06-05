@@ -67,11 +67,12 @@ def test_replace_movie_in_db_with_existing_id(setup_db):
     # Retrieve the replaced movie
     all_movies = Movie.query.all()
     # Change movie_dict_example_2's id to 1 (id of movie to replace)
-    movie_dict_example_2['id'] = 1
+    movie_dict_example_2_copy = movie_dict_example_2.copy()
+    movie_dict_example_2_copy['id'] = 1
 
     # ASSERT
     assert len(all_movies) == 1
-    assert all_movies[0].dump() == movie_dict_example_2
+    assert all_movies[0].dump() == movie_dict_example_2_copy
 
 def test_replace_movie_in_db_with_non_existing_id(setup_db):
     # ARRANGE
@@ -80,11 +81,12 @@ def test_replace_movie_in_db_with_non_existing_id(setup_db):
     # Retrieve the replaced movie
     all_movies = Movie.query.all()
     # Change movie_dict_example_2's id to 1 (id is autoincrement => first movie inserted will have id 1)
-    movie_dict_example_2['id'] = 1
+    movie_dict_example_2_copy = movie_dict_example_2.copy()
+    movie_dict_example_2_copy['id'] = 1
 
     # ASSERT
     assert len(all_movies) == 1
-    assert all_movies[0].dump() == movie_dict_example_2
+    assert all_movies[0].dump() == movie_dict_example_2_copy
 
 def test_delete_movie_by_id(setup_db):
     # ARRANGE
