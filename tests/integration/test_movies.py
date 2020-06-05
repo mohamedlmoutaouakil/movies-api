@@ -48,3 +48,16 @@ def test_get_movie_with_non_existing_id(test_client):
     # ASSERT
     assert response.status_code == 404
     assert response.json == 'Movie Not Found'
+
+def test_add_movie(test_client):
+    # ARRANGE
+    # ACT
+    response = test_client.post('/movies', json=movie_dict_example_1)
+    all_movies = Movie.query.all()
+    
+    # ASSERT
+    assert response.status_code == 201
+    assert response.json == {}
+    assert len(all_movies) == 1
+    assert all_movies[0].dump() == movie_dict_example_1
+
