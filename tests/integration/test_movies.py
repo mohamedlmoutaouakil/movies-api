@@ -96,3 +96,29 @@ def test_replace_movie_with_non_existing_id(test_client):
     assert len(all_movies) == 1
     assert all_movies[0].dump() == movie_dict_example_2_copy
 
+def test_delete_movie(test_client):
+    # ARRANGE
+    # Insert a movie in database
+    movie_model = Movie.load(movie_dict_example_1)
+    db.session.add(movie_model)
+    db.session.commit()
+    movie_id = 1
+
+    # ACT
+    response = test_client.delete(f'/movies/{movie_id}')
+    all_movies = Movie.query.all()
+
+    # ASSERT
+    assert response.status_code == 204
+    assert len(all_movies) == 0
+
+def test_delete_movie_with_non_existing_id(test_client):
+    # ARRANGE
+    movie_id = 1
+
+    # ACT
+    response = test_client.delete(f'/movies/{movie_id}')
+
+    # ASSERT
+    assert response.status_code == 404
+    assert response.json == 'Movie Not Found'
