@@ -8,9 +8,8 @@ logger = logging.getLogger('data_access_layer')
 
 def get_all_movies():
     all_movies = Movie.query.all()
-    all_movies_dicts = [m.dump() for m in all_movies]
     logger.info('Retrieved all movies from database.')
-    return all_movies_dicts
+    return all_movies
     
 def get_movie_by_id(movie_id):
     movie = Movie.query.get(movie_id)

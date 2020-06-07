@@ -17,7 +17,7 @@ def test_get_all_movies(setup_db):
 
     # ASSERT
     assert len(all_movies) == 1
-    assert all_movies[0] == movie_dict_example_1
+    assert all_movies[0].dump() == movie_dict_example_1
 
 def test_get_movie_by_id(setup_db):
     # ARRANGE

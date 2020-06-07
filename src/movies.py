@@ -7,7 +7,8 @@ logger = logging.getLogger('movies')
 def read():
     logger.info('Read endpoit called!')
     try:
-        all_movies_dicts = get_all_movies()
+        all_movies = get_all_movies()
+        all_movies_dicts = [m.dump() for m in all_movies]
     except Exception as e:
         logger.exception(e)
         return 'Internal server error', 500
