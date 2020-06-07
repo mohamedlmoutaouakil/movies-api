@@ -8,6 +8,7 @@ I have a windows OS, in my case I installed pipenv using the following command:
 ```bat
 py -m install pipenv
 ```
+Create a folder named databases in the root of the project, it will contain the sqlite .db files.
 ## Running the server
 First of all you need to activate the virtual envirenment:
 ```bat
